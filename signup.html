@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/7b78e77d77.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>PPS Bank - Website chính thức của hệ thống ngân hàng PPS </title>
+
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+        <a class="navbar-brand" href="./index.html">
+            <i class="fa fa-building"></i>
+            <h1 class="navbar-symbol">PPS bank</h1>
+        </a>
+      
+       
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link login" href="./login.html">Đăng nhập</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link signup active" href="#">Đăng kí</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Xem Thêm
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Thông tin ngân hàng</a>
+              <a class="dropdown-item" href="#">Quyền lợi khách hàng</a>
+              <a class="dropdown-item" href="#">Hỏi & Đáp</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+
+      <form id="form-signup" class="mt-4" action="/login.html">
+        <div class="container w-50 signup-background" id="sign-up">
+          <div class="title">
+              <h1 class="signup-header">Form đăng kí thông tin</h1>
+          </div>
+          <div class="form-group w-100 mx-auto pt-5 ">
+              
+                  <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="fname">Họ:</label>
+                        <input type="text" class="form-control" id="fname" placeholder="Vui lòng nhập họ" name="fname" onkeyup="successMessage()" required>
+                        <span class="fName-error error-message"></span>
+                      </div>
+      
+                      <div class="form-group col-sm-6">
+                          <label for="lname">Tên:</label>
+                          <input type="text" class="form-control" id="lname" placeholder="Vui lòng nhập tên" name="lname" onkeyup="successMessage()" required>
+                          <span class="lName-error error-message"></span>
+                      </div>
+                  </div>
+  
+                  <div class="form-group ">
+                      <label for="uname">Tên đăng nhập:</label>
+                      <input type="text" class="form-control" id="uname" placeholder="Vui lòng nhập tên đăng nhập" name="uname" onkeyup="successMessage()" required>
+                      <span class="uName-error error-message"></span>
+                  </div>
+  
+                  <div class="form-group " >
+                    <label for="pwd">Mật khẩu:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Vui lòng nhập mật khẩu" name="pwd" onkeyup="successMessage()" required>
+                    <span class="pass-error error-message"></span>
+                  </div>
+
+                  <div class="form-group" >
+                    <label for="cf-pwd">Xác nhận mật khẩu:</label>
+                    <input type="password" class="form-control" id="cf-pwd" placeholder="Vui lòng nhập lại mật khẩu" name="cf-pwd" onkeyup="successMessage()" required>
+                    <span class="confpass-error error-message"></span>
+                  </div>
+                  
+                  <div class="form-group" >
+                    <label for="birth">Ngày sinh:</label>
+                    <input type="date" class="form-control" id="birth" name="birth" onchange="successMessage()" required>
+                    <span class="birth-error error-message"></span>
+                  </div>
+
+                  <div class="form-group" >
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Vui lòng nhập số điện thoại" name="phone" onkeyup="successMessage()" required>
+                    <span class="phone-error error-message"></span>
+                  </div>
+
+                  <div class="form-group" >
+                    <label for="idResident">Căn cước công dân:</label>
+                    <input type="text" class="form-control" id="idResident" placeholder="Vui lòng nhập số căn cước công dân" name="idResident" onkeyup="successMessage()" required>
+                    <span class="idResident-error error-message"></span>
+                  </div>
+                  
+                  <div class="form-group" >
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" class="form-control" id="address" placeholder="Vui lòng nhập địa chỉ" name="address" onkeyup="successMessage()" required>
+                    <span class="address-error error-message"></span>
+                  </div>
+
+
+                  <div class="form-group form-gender">
+                    <input type="radio" class="gender" id="Male"  name="Gender" required> Nam
+                    <div class="invalid-feedback">Vui lòng chọn 1 trong 2 trường này</div>
+                    
+                    <input type="radio" class="gender" id="Female"  name="Gender" required> Nữ
+                    <div class="invalid-feedback">Vui lòng chọn 1 trong 2 trường này</div>
+                  </div>
+  
+
+                      <div class="row">
+                          <div class="col-sm-12 pr-5">
+                              <button type="submit" id="btn-signup" class="btn btn-success px-4 mr-3 " onclick="Redirect()">Sign up</button>
+                              <h4 style="text-align:right; font-size:16px;">Đã có tài khoản ? <a href="./login.html">Đăng nhập</a> </h4>
+                          </div>                       
+                      </div>
+          </div>
+      </div>
+        
+      </form>
+
+
+    <footer class="footer bg-dark text-white"><h4 class="footer-font"> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4></footer>
+
+</body>
+
+<script src="./signup.js"></script>
+</html>
