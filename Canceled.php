@@ -25,11 +25,6 @@ if (!isset($_SESSION['admin'])) {
 
 ?>
 
-<script>
-    $(document).ready(function() {
-        $.get("./get_customers.php", function(data, status) {}, "json");
-    })
-</script>
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">

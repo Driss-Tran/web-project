@@ -52,7 +52,7 @@ if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
     else if($total==3 && $countTotal==1){
         $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng liên hệ quản trị viên để biết thêm chi tiết.';
         mysqli_query($conn, "update login set timeOutTryLog = 1 where username = '$username'");
-        mysqli_query($conn, "update logup set confirm = 3 where username = '$username'");
+        mysqli_query($conn, "update logup set confirm = 3 where id = '$idResult'");
     }
     else
     {
@@ -88,7 +88,7 @@ if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
                 else if($tryLogin==0 && $countTotal==1){
                     $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng liên hệ quản trị viên để biết thêm chi tiết.';
                     mysqli_query($conn, "update login set timeOutTryLog = 1 where username = '$username'");
-                    mysqli_query($conn, "update logup set confirm = -1 where id = $idResult");
+                    mysqli_query($conn, "update logup set confirm = 3 where id = $idResult");
                 }
                 else if($tryLogin>0){
                     $message = "Bạn đã đăng nhập sai. Còn lại $tryLogin lần. Vui lòng nhập lại";

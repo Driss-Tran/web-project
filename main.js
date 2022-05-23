@@ -29,8 +29,7 @@ $(document).ready(function() {
             let CMNDbefore = users[i].CMNDbefore;
             let CMNDafter = users[i].CMNDafter;
             
-            if(confirm==="0" || confirm==="2")
-            {
+            if(confirm==="0" || confirm==="2"){
                 markup = `
                 <tr>
                     <th class="th" scope = 'row' id="${count}"> ${count} </th>
@@ -45,7 +44,8 @@ $(document).ready(function() {
                 `;
                 $('#usersTbl > tbody:last-child').append(markup);
             }
-            if (confirm==="1"){
+        
+            else if (confirm==="1"){
                 markup = `
                 <tr>
                     <th class="th" scope = 'row' id="${count}"> ${count} </th>
@@ -63,7 +63,7 @@ $(document).ready(function() {
                 `;
                 $('#confirmedUsersTbl > tbody:last-child').append(markup);
             }
-            if (confirm==="-1"){
+            else if(confirm==="-1"){
                 markup = `
                 <tr>
                     <th class="th" scope = 'row' id="${count}"> ${count} </th>
@@ -75,13 +75,13 @@ $(document).ready(function() {
                     <td class="td">${confirm}</td>
                     <td class="td">${CMNDbefore}</td>
                     <td class="td">${CMNDafter}</td>
-                    <td class="td"><span class="edit-btn btn btn-success" type="submit"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
+                    <td class="td"><span class="edit-btn btn btn-success"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
 
                     </tr>
                 `;
-                $('#confirmedUsersTbl > tbody:last-child').append(markup);
+                $('#canceledUsersTbl > tbody:last-child').append(markup);
             }
-            if(confirm==="-1"){
+            else if(confirm==="3"){
                 markup = `
                 <tr>
                     <th class="th" scope = 'row' id="${count}"> ${count} </th>
@@ -133,6 +133,7 @@ $(document).ready(function() {
     });
 
     $('#editBtn').click(function(){
+        location.reload();
         editUsers();
     });
 
@@ -173,11 +174,8 @@ $(document).ready(function() {
                 deleteAllRow();
                 getUsers();
             }
-
-        
         )
     }
-    
 
 })
 
@@ -189,7 +187,5 @@ function Handle()
     }
     else {
         MenuItems.style.maxHeight = "0px";
-
-
     }
 }
