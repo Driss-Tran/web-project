@@ -133,68 +133,7 @@ form{
 
 
 
-@media screen and (max-width:720px){
-    .sub-desc{
-        margin: 0;
-        padding-top: 12px;
-        font-size: 24px;
-        padding-right: 12px;
-    }
 
-    .footer-font{
-        font-size:16px;
-    }
-
-    nav ul{
-        position:absolute;
-        top:70px;
-        left:0; 
-        background:#333;
-        width:100%;
-        overflow: hidden;
-        transition:max-height 0.5s;
-        
-    }
-
-    .menuItems{
-        padding-left: 24px;
-        font-size: 24px;
-    }
-
-    .dropdown-menu{
-        background:white;
-        width: 85%;
-        margin-top: 0;
-    }
-
-    .dropdown-item{
-        color: rgb(148, 146, 146);
-        font-size: 20px;
-    }
-
-    .nav-item{
-        width: 100%;
-    }
-
-    nav ul li{
-        display:block;
-        margin-right: 50px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    nav ul li a{
-        color: #fff;
-    }
-
-    
-    .menu-icon{
-        display:block;
-        cursor: pointer;
-    }
-
-    
-}
 
 /* register end */
 
@@ -244,28 +183,16 @@ form{
 }
 
 
-@media screen and (max-width:720px){
-    .btn-sub{
-        margin-bottom: 10px;
-    }
-    .btn_custom{
-        width: 100%;
-        margin-bottom: 25px;
-    }
-    .button-form{
-        display:block;
-    }
-    .input-items{
-        margin-left: 0px;
-    }
-    
-}
 
-#moneyForm{
+
+#moneyForm,
+.updateForm{
     padding:0;
     height:unset;
     
 }
+
+
 
 /* After transfer */
 .main{
@@ -326,11 +253,14 @@ form{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+
 }
 
-.tr:nth-child(even) {
-    background-color: #dddddd;
+.td{
+    font-weight: 500;
 }
+
+
 .header_table{
     font-family: 'Kaushan Script', cursive;
     font-family: 'Poppins', sans-serif;
@@ -347,4 +277,131 @@ form{
 
 .dropdown{
     margin: 0;
+}
+
+.card{
+    overflow:hidden;
+
+}
+
+.card-info:hover{
+    cursor:pointer;
+    transform:translateY(-2%);
+    transition:transform .5s ease-in-out;
+}
+
+.card-text{
+    overflow:hidden;
+    display:block;
+    display :-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp: 4;
+}
+
+.adminActionList{
+    list-style:none;
+}
+
+.adminActionList li{
+    margin-top: 12px;
+    text-align:center;
+}
+
+.adminActionListHeader{
+    text-align:center;
+    margin-top:20px;
+}
+
+.tableList{
+    overflow-x: auto;
+}
+
+@media screen and (max-width:720px){
+    .sub-desc{
+        margin: 0;
+        padding-top: 12px;
+        font-size: 24px;
+        padding-right: 12px;
+    }
+
+    .footer-font{
+        font-size:16px;
+    }
+
+    nav ul{
+        position:absolute;
+        top:70px;
+        left:0; 
+        background:#333;
+        width:100%;
+        overflow: hidden;
+        transition:max-height 0.5s;
+        
+    }
+
+    .menuItems{
+        padding-left: 24px;
+        font-size: 24px;
+        z-index:100;
+    }
+
+    .dropdown-menu{
+        background:#333;
+        width: 85%;
+        margin-top: 0;
+        border: none;
+    }
+
+    .dropdown-item{
+        color: rgb(148, 146, 146);
+        font-size: 20px;
+    }
+
+    .nav-item{
+        width: 100%;
+    }
+
+    nav ul li{
+        display:block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    nav ul li a{
+        color: #fff;
+    }
+
+    
+    .menu-icon{
+        display:block;
+        cursor: pointer;
+    }
+
+
+    .transferBtn{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+
+    .btn-sub{
+        margin-bottom: 10px;
+    }
+    .btn_custom{
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .button-form{
+        display:block;
+    }
+    .input-items{
+        margin-left: 0px;
+    }
+
+    .menuItems{
+        max-height: 0;
+        transition:max-height 0.8s ease-in-out;
+    }
+
 }

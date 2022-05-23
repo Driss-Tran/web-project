@@ -139,12 +139,11 @@
 
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container">
             <a class="navbar-brand" href="./homePage.php">
                 <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
             </a>
-            <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
+
+            <ul class="navbar-nav menuItems mb-5">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chào,
                         <?php
@@ -161,15 +160,14 @@
                       <a class="dropdown-item" href="#">Đổi mật khẩu</a>
                       <a class="dropdown-item" href="#">Chuyển tiền</a>
                       <a class="dropdown-item" href="./historyTransfer.php">Lịch sử giao dịch</a>
-
                     </div>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="logout.php">Đăng xuất</a>
                 </li>
             </ul>
-            </div>
-        </div>
+            <i class='fa fa-bars text-white menu-icon' onclick='Handle()'></i>
+
     </nav>
 <div class="container">
         <div class="row">
@@ -202,8 +200,8 @@
                     <div class="has-error">
                     <span class="text-danger"><?php echo (isset($message)) ? $message : "" ?></span>
                     </div>
-                    <button type="submit" name="submit" value="submit" class="btn btn-success px-5 mr-2">Nạp tiền</button>
-                    <a href="./homePage.php" class="btn btn-outline-success px-5 mr-2">Quay về trang chủ</a>
+                    <button type="submit" name="submit" value="submit" class="transferBtn btn btn-success px-5 mr-2">Nạp tiền</button>
+                    <a href="./homePage.php" class="transferBtn btn btn-outline-success px-5 mr-2">Quay về trang chủ</a>
                 </form>
             </div>
         </div>
@@ -211,4 +209,6 @@
 <footer class="footer bg-dark text-white"><h4 class="footer-font"> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4></footer>
 
 </body>
+<script src="./main.js"></script>
+
 </html>

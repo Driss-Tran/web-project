@@ -36,12 +36,10 @@ if(!isset($_SESSION['usr']))
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container">
             <a class="navbar-brand" href="./homePage.php">
                 <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
             </a>
-            <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav menuItems mb-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chào,
                         <?php
@@ -68,8 +66,7 @@ if(!isset($_SESSION['usr']))
                     <a class="nav-link" href="logout.php">Đăng xuất</a>
                 </li>
             </ul>
-            </div>
-        </div>
+            <i class='fa fa-bars text-white menu-icon' onclick='Handle()'></i>
     </nav>
     <div class="container">
         <div class="row">
@@ -129,6 +126,6 @@ if(!isset($_SESSION['usr']))
     </div>
 </body>
 <footer class="footer bg-dark text-white"><h4 class="footer-font"> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4></footer>
-<script>
+<script src="./main.js">
 </script>
 </html>

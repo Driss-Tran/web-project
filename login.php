@@ -1,10 +1,29 @@
 <?php
 include './connect.php';
-if (isset($_POST["usr"])) {
+$message = '';
+if(isset($_POST["usr"]) && $_POST["usr"]==='admin') {
+    $_SESSION['admin'] = $_POST["usr"];
+    $passAdmin = "select password from login where username = 'admin'";
+
+    $result = mysqli_fetch_assoc(mysqli_query($conn,$passAdmin));
+    if($result["password"] == $_POST["password"]) {
+        header("location: ./admin.php");
+    }
+    else {
+        $message = 'Vui lòng nhập lại';
+    }
+}
+if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
     $err = [];
-    $message = '';
+    
     $username = $_POST["usr"];
     $password = $_POST["password"];
+    $idSql = "select id from logup where email = (select email from login where username = '$username')";
+    $id = mysqli_fetch_assoc(mysqli_query($conn, $idSql));
+    $idResult = $id['id'];
+    
+
+
     $cpr_tk = "Select * from login where username = '$username'";
     $cpr_pwd = "Select * from login where password = '$password'";
     $query_tk = mysqli_query($conn, $cpr_tk);
@@ -17,18 +36,23 @@ if (isset($_POST["usr"])) {
     $check_login = mysqli_fetch_assoc(mysqli_query($conn, "select count(*) as timeOut from login_tryLog where tryLog > $time"));
     $total = $check_login['timeOut'];
     $count =mysqli_fetch_assoc(mysqli_query($conn, "select timeOutTryLog from login where username = '$username'"));
-    $countTotal = $count['timeOutTryLog'];
-    if(!$check_tk) {
-        $message = 'Tài khoản của bạn chưa chính xác';
-        $err["$username"] = '-1';
+    $countTotal = '';
+    if(isset($count['timeOutTryLog']))
+    {
+        $countTotal = $count['timeOutTryLog'];
     }
-    if($total==3 && $countTotal==0){
+    if(!$check_tk) {
+            $message = 'Tài khoản của bạn chưa chính xác';
+            $err["username"] = '-1';        
+    }
+    else if($total==3 && $countTotal==0){
         $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng thử lại sau 1 phút.';
         mysqli_query($conn, "update login set timeOutTryLog = 1 where username = '$username'");
     }
     else if($total==3 && $countTotal==1){
         $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng liên hệ quản trị viên để biết thêm chi tiết.';
         mysqli_query($conn, "update login set timeOutTryLog = 1 where username = '$username'");
+        mysqli_query($conn, "update logup set confirm = 3 where username = '$username'");
     }
     else
     {
@@ -64,6 +88,7 @@ if (isset($_POST["usr"])) {
                 else if($tryLogin==0 && $countTotal==1){
                     $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng liên hệ quản trị viên để biết thêm chi tiết.';
                     mysqli_query($conn, "update login set timeOutTryLog = 1 where username = '$username'");
+                    mysqli_query($conn, "update logup set confirm = -1 where id = $idResult");
                 }
                 else if($tryLogin>0){
                     $message = "Bạn đã đăng nhập sai. Còn lại $tryLogin lần. Vui lòng nhập lại";
@@ -115,13 +140,13 @@ function getIP(){
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="./index.php">
             <i class="fa fa-building"></i>
             <h1 class="navbar-symbol">PPS bank</h1>
         </a>
         <ul class="navbar-nav menuItems mb-5">
             <li class="nav-item">
-                <a class="nav-link login active" href="#">Đăng nhập</a>
+                <a class="nav-link login active" href="./login.php">Đăng nhập</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link signup" href="./register.php">Đăng kí</a>
@@ -136,7 +161,7 @@ function getIP(){
 
             <div class="form-group input-items">
                 <label for="usr" class="usr" style="cursor: pointer;">UserName</label>
-                <input name="usr" id="usr" type="text" class="form-control w-75" placeholder="User-name" />
+                <input name="usr" id="usr" type="text" class="form-control w-100" placeholder="User-name" />
                 <!-- <div class="has-error">
                     <span class="text-danger"><?php // echo(isset($err['$username']))?$err['$username']:"" 
                                                 ?></span>
@@ -145,7 +170,7 @@ function getIP(){
 
             <div class="form-group input-items">
                 <label for="pwd" class="usr" style="cursor: pointer;">Password</label>
-                <input name="password" id="pwd" type="password" class="form-control w-75" placeholder="Password" />
+                <input name="password" id="pwd" type="password" class="form-control w-100" placeholder="Password" />
 
             </div>
 

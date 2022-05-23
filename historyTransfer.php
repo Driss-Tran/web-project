@@ -40,12 +40,10 @@ $count = mysqli_num_rows($result);?>
 
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container">
             <a class="navbar-brand" href="./homePage.php">
                 <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
             </a>
-            <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav menuItems mb-5">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chào,
                         <?php
@@ -69,8 +67,8 @@ $count = mysqli_num_rows($result);?>
                     <a class="nav-link" href="logout.php">Đăng xuất</a>
                 </li>
             </ul>
-            </div>
-        </div>
+            <i class='fa fa-bars text-white menu-icon' onclick='Handle()'></i>
+
     </nav>
     <div class="container">
         <h2 class="header_table">Lịch sử giao dịch</h2>

@@ -106,7 +106,7 @@ include './connect.php';
 </head>
 <body>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./index.php">
                     <i class="fa fa-building"></i>
                     <h1 class="navbar-symbol">PPS bank</h1>
                 </a>             
@@ -116,16 +116,6 @@ include './connect.php';
                   </li>
                   <li class="nav-item">
                     <a class="nav-link signup active" href="#">Đăng kí</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Xem Thêm
-                    </a>
-                    <div class="dropdown-menu ">
-                      <a class="dropdown-item" href="#">Thông tin ngân hàng</a>
-                      <a class="dropdown-item" href="#">Quyền lợi khách hàng</a>
-                      <a class="dropdown-item" href="#">Hỏi & Đáp</a>
-                    </div>
                   </li>
                 </ul>
                 <i class="fa fa-bars text-white menu-icon" onclick="Handle()"></i>
@@ -220,40 +210,7 @@ include './connect.php';
     <footer class="footer bg-dark text-white"><h4 class="footer-font"> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4></footer>
 </body>
 <script src="https://smtpjs.com/v3/smtp.js"></script>
-<script>
-    let btn  = document.getElementById('btn')
-    let message = "hello"
-    let MenuItems = document.querySelector(".menuItems");
-    MenuItems.style.maxHeight ="0px";
-    function Handle()
-    {
-        if(MenuItems.style.maxHeight =="0px")
-        {
-            MenuItems.style.maxHeight ="400px";
-        }
-        else
-        {
-            MenuItems.style.maxHeight ="0px";
-        }
-    }
-    </script>
-    <!-- <script>
-    let id=<?php //echo json_encode($tk); ?>;
-    let pass=<?php //echo json_encode($mk); ?>;
-        function sendMail()
-        {
-            Email.send({
-            Host : "smtp.elasticemail.com",
-            Username : "PPSBank-official@gmail.com",  
-            Password : "456F520EC152539B5340020F1A0E0102B446",
-            To : document.getElementById('email').value,
-            From : "nothingboy2407@gmail.com",
-            Subject : "This is the subject",
-            Body : "Tai khoan cua ban la: "+id +" Mat khau cua ban la: "+pass,
-            }).then(
-                message => alert(message),
-            );
-        }
-    </script> -->
+<script src="./main.js"></script>
 
+    
 </html>
