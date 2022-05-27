@@ -15,8 +15,10 @@
     if(empty($input->id)){
         die(json_encode(array('code'=>1,'message'=>'Thông tin không hợp lệ')));
     }
-    if(confirmUsers($conn,$input,1)['code']!=0){
+    if(confirmUsers($conn,$input,2)['code']!=0){
         die(json_encode(array('code'=>1,'message'=>confirmUsers($conn,$input,1)['message'])));
     }
-    die(json_encode(array('code'=>0,'data'=>confirmUsers($conn,$input,1)['message'])));
+    die(json_encode(array('code'=>0,'data'=>confirmUsers($conn,$input,2)['message'])));
+
+
 ?>

@@ -1,7 +1,14 @@
 <?php
 include './connect.php';
 $message = '';
+
 if(isset($_POST["usr"]) && $_POST["usr"]==='admin') {
+    $adminSql = "select username from login where username ='admin'";
+    $result = mysqli_query($conn,$adminSql);
+    if(!($result->fetch_assoc())){
+        $admin_login = "insert into login(username,password,email,timeOutTryLog) values('admin','admin','admin@gmail.com',0)";
+        mysqli_query($conn,$admin_login);
+    }
     $_SESSION['admin'] = $_POST["usr"];
     $passAdmin = "select password from login where username = 'admin'";
 
@@ -18,9 +25,7 @@ if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
     
     $username = $_POST["usr"];
     $password = $_POST["password"];
-    $idSql = "select id from logup where email = (select email from login where username = '$username')";
-    $id = mysqli_fetch_assoc(mysqli_query($conn, $idSql));
-    $idResult = $id['id'];
+    
     
 
 
@@ -56,6 +61,9 @@ if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
     }
     else
     {
+        $idSql = "select id from logup where email = (select email from login where username = '$username')";
+        $id = mysqli_fetch_assoc(mysqli_query($conn, $idSql));
+        $idResult = $id['id'];
         $sql = "select * from login where username = '$username' and password = '$password'";
         $result = mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)){
@@ -73,6 +81,9 @@ if (isset($_POST["usr"]) && $_POST["usr"]!=='admin') {
                 if($print['confirm'] === "-1")
                 {
                     $errorMessage = '<h3 class="text-danger text-center pt-5"> Tài khoản này đã bị vô hiệu hóa, vui lòng liên hệ tổng đài 18001008 </h3>';
+                }
+                else if($print['confirm'] === "3"){
+                    $message = 'Bạn đăng nhập sai quá nhiều lần vui lòng liên hệ quản trị viên để biết thêm chi tiết';
                 }
                 else{
                     header('location: homePage.php');

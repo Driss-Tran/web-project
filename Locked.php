@@ -29,20 +29,20 @@ if (!isset($_SESSION['admin'])) {
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="./admin.php">
-                <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
-            </a>
-                <ul class="navbar-nav menuItems mb-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin.php">Chào,
-                            admin
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="logout.php">Đăng xuất</a>
-                    </li>
-                </ul>
-                <i class='fa fa-bars text-white menu-icon' onclick='Handle()'></i>
+        <a class="navbar-brand" href="./admin.php">
+            <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
+        </a>
+        <ul class="navbar-nav menuItems mb-3">
+            <li class="nav-item">
+                <a class="nav-link" href="admin.php">Chào,
+                    admin
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="logout.php">Đăng xuất</a>
+            </li>
+        </ul>
+        <i class='fa fa-bars text-white menu-icon' onclick='Handle()'></i>
 
     </nav>
     <div class="container tableList">
@@ -59,7 +59,6 @@ if (!isset($_SESSION['admin'])) {
                     <th class="th" scope="col">Xác minh tài khoản</th>
                     <th class="th" scope="col">CMND mặt trước</th>
                     <th class="th" scope="col">CMND mặt sau</th>
-                    <th class="th" scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +79,7 @@ if (!isset($_SESSION['admin'])) {
         </div>
 
 
-        <div class="modal fade" id="edit-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="detail-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role='document'>
                 <div class="modal-content">
                     <div class="modal-header">
@@ -89,22 +88,13 @@ if (!isset($_SESSION['admin'])) {
                     </div>
 
                     <div class="modal-body">
-                        <h3>Bạn có chắc là xác nhận tài khoản này</h3>
+                        <h3>Bạn có muốn xem chi tiết tài khoản này</h3>
                         <div class="modal-footer">
                             <div class="form-group">
-                                <label class="control-label " for="name">Tên khách hàng:</label>
-                                <input type="text" class="form-control" id="edit-name" placeholder="Enter name" name='name'>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="edit-ID" placeholder="Enter name" name='id'>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label " for="confirm">Confirm number:</label>
-                                <input type="text" class="form-control" id="edit-confirm" placeholder="Enter Confirm number" name='confirm'>
+                                <input type="hidden" class="form-control" id="detail-ID" placeholder="Enter name" name='id'>
                             </div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" id="editBtn" class="btn btn-primary">Lưu thay đổi</button>
+                            <button id="getDetails" class="btn btn-primary">Đồng ý</button>
                         </div>
                     </div>
                 </div>
@@ -112,6 +102,10 @@ if (!isset($_SESSION['admin'])) {
         </div>
 
 
+        
+
+
 </body>
 <script src="./main.js"></script>
+
 </html>

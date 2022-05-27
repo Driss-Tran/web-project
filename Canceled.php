@@ -56,7 +56,6 @@ if (!isset($_SESSION['admin'])) {
                     <th class="th" scope="col">Xác minh tài khoản</th>
                     <th class="th" scope="col">CMND mặt trước</th>
                     <th class="th" scope="col">CMND mặt sau</th>
-                    <th class="th" scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +75,7 @@ if (!isset($_SESSION['admin'])) {
             <a href="./Locked.php" class="btn btn-primary">Danh sách các tài khoản khóa</a>
         </div>
 
-        <div class="modal fade" id="edit-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="detail-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role='document'>
                 <div class="modal-content">
                     <div class="modal-header">
@@ -85,22 +84,13 @@ if (!isset($_SESSION['admin'])) {
                     </div>
 
                     <div class="modal-body">
-                        <h3>Bạn có chắc là xác nhận tài khoản này</h3>
+                        <h3>Bạn có muốn xem chi tiết tài khoản này</h3>
                         <div class="modal-footer">
                             <div class="form-group">
-                                <label class="control-label " for="name">Tên khách hàng:</label>
-                                <input type="text" class="form-control" id="edit-name" placeholder="Enter name" name='name'>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="edit-ID" placeholder="Enter name" name='id'>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label " for="confirm">Confirm number:</label>
-                                <input type="text" class="form-control" id="edit-confirm" placeholder="Enter Confirm number" name='confirm'>
-                            </div>
+                                    <input type="hidden" class="form-control" id="detail-ID" placeholder="Enter name" name='id'>
+                                </div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" id="editBtn" class="btn btn-primary">Lưu thay đổi</button>
+                            <button id="getDetails" class="btn btn-primary">Đồng ý</button>
                         </div>
                     </div>
                 </div>

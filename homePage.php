@@ -316,7 +316,6 @@ $userName = $temp['username'];
 
 
 
-
   <footer class='footer bg-dark text-white mt-3'>
     <h4 class='footer-font'> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4>
   </footer>

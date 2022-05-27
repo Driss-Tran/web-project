@@ -16,12 +16,7 @@
     $table_countLogin = "Create table if not exists login_tryLog(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,ipAddress varchar(30),tryLog bigint)";
     $table_historytransfer = "Create table if not exists historytransfer(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,username varchar(255), dayTransfer datetime, moneyTransfer bigint)";
     
-    $adminSql = "select username from login where username ='admin'";
-    $result = mysqli_query($conn,$adminSql);
-    if(!($result->fetch_assoc())){
-        $admin_login = "insert into login(username,password,email,timeOutTryLog) values('admin','123456','admin@gmail.com',0)";
-        mysqli_query($conn,$admin_login);
-    }
+    
     if(!$conn -> query($table_login))
     {
         die("Cannot create table: ".$conn->error);
@@ -38,7 +33,7 @@
     {
         die("Cannot create table: ".$conn->error);
     }
-    function getProducts($conn){
+    function getUsers($conn){
         $sql = "select * from logup";
         $result = $conn->query($sql);
         $data = array();
@@ -52,17 +47,19 @@
         return array('code'=>1,'message'=>"Dữ liệu rỗng");
     }
     
-    function confirmUsers($conn, $input){
+    function confirmUsers($conn, $input,$confirmNumber){
         $id = $input->id;
-        $confirm = $input->confirm;
         $sql = "update logup set confirm = ? where id = ?";
         $stm = $conn->prepare($sql);
-        $stm->bind_param('ss',$confirm,$id);
+        $stm->bind_param('ss',$confirmNumber,$id);
         if(!$stm->execute()){
             return array('code'=>1,'message'=>'Không thể cập nhật dữ liệu');
         }
         return array('code'=>0,'message'=>'Đã cập nhật dữ liệu thành công');
     }
+
+    
+   
     mysqli_set_charset($conn,"utf8");
     session_start();
 ?>

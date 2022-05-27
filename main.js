@@ -1,73 +1,72 @@
 
 
-$(document).ready(function() {
-   
+$(document).ready(function () {
+
     let users = [];
     let selectedUsers = {};
 
     getUsers();
-    function getUsers(){
-        $.getJSON("./get_customers.php",function(result){
-            users= result.data;
+    function getUsers() {
+        $.getJSON("./get_customers.php", function (result) {
+            users = result.data;
             console.log(result.data);
             displayHTML();
         })
     };
-    function displayHTML(){
+    
+    
+    
+    function displayHTML() {
         let markup = '';
         let size = users.length;
-        let count = 0 ;
-        for(let i =size-1;i>=0;i--){
-            count++;
+        for (let i = size - 1; i >= 0; i--) {
             let name = users[i].username;
             let email = users[i].email;
             let address = users[i].address;
             let phone = users[i].phone;
             let birthday = users[i].birthday;
             let confirm = users[i].confirm;
-            let money = users[i].moneyremaining;
             let CMNDbefore = users[i].CMNDbefore;
             let CMNDafter = users[i].CMNDafter;
-            
-            if(confirm==="0" || confirm==="2"){
+
+            if (confirm === "0" || confirm === "2") {
                 markup = `
                 <tr>
-                    <th class="th" scope = 'row' id="${count}"> ${count} </th>
-                    <td class="td">${name}</td>
+                    <th class="th" scope = 'row' id="${users[i].id}" > ${users[i].id} </th>
+                    <td class="td"> <a data-index="${users[i].id}" class="detailUser" data-toggle='modal'  data-target='#detail-Modal'> ${name}</a></td>
                     <td class="td">${email}</td>
+                    <td class="td">${address}</td>
                     <td class="td">${confirm}</td>
                     <td class="td">${CMNDbefore}</td>
                     <td class="td">${CMNDafter}</td>
-                    <td class="td"><span class="edit-btn btn btn-success" type="submit"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
+                    
 
                     </tr>
                 `;
                 $('#usersTbl > tbody:last-child').append(markup);
             }
-        
-            else if (confirm==="1"){
+
+            else if (confirm === "1") {
                 markup = `
                 <tr>
-                    <th class="th" scope = 'row' id="${count}"> ${count} </th>
-                    <td class="td">${name}</td>
+                    <th class="th" scope = 'row' id="${users[i].id}" > ${users[i].id} </th>
+                    <td class="td"> <a data-index="${users[i].id}" class="detailUser" data-toggle='modal'  data-target='#detail-Modal'> ${name}</a></td>
                     <td class="td">${email}</td>
                     <td class="td">${address}</td>
                     <td class="td">${phone}</td>
                     <td class="td">${birthday}</td>
                     <td class="td">${confirm}</td>
-                    <td class="td">${CMNDbefore}</td>
-                    <td class="td">${CMNDafter}</td>
-                    <td class="td"><span class="edit-btn btn btn-success" type="submit"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
+                    
 
                     </tr>
                 `;
                 $('#confirmedUsersTbl > tbody:last-child').append(markup);
             }
-            else if(confirm==="-1"){
+            else if (confirm === "-1") {
                 markup = `
                 <tr>
-                    <th class="th" scope = 'row' id="${count}"> ${count} </th>
-                    <td class="td">${name}</td>
+                    <th class="th" scope = 'row' id="${users[i].id}" > ${users[i].id} </th>
+                    <td class="td"> <a data-index="${users[i].id}" class="detailUser" data-toggle='modal'  data-target='#detail-Modal'> ${name}</a></td>
                     <td class="td">${email}</td>
                     <td class="td">${address}</td>
                     <td class="td">${phone}</td>
@@ -75,17 +74,17 @@ $(document).ready(function() {
                     <td class="td">${confirm}</td>
                     <td class="td">${CMNDbefore}</td>
                     <td class="td">${CMNDafter}</td>
-                    <td class="td"><span class="edit-btn btn btn-success"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
+                    
 
                     </tr>
                 `;
                 $('#canceledUsersTbl > tbody:last-child').append(markup);
             }
-            else if(confirm==="3"){
+            else if (confirm === "3") {
                 markup = `
                 <tr>
-                    <th class="th" scope = 'row' id="${count}"> ${count} </th>
-                    <td class="td">${name}</td>
+                    <th class="th" scope = 'row' id="${users[i].id}" > ${users[i].id} </th>
+                    <td class="td"> <a data-index="${users[i].id}" class="detailUser" data-toggle='modal'  data-target='#detail-Modal'> ${name}</a></td>
                     <td class="td">${email}</td>
                     <td class="td">${address}</td>
                     <td class="td">${phone}</td>
@@ -93,53 +92,63 @@ $(document).ready(function() {
                     <td class="td">${confirm}</td>
                     <td class="td">${CMNDbefore}</td>
                     <td class="td">${CMNDafter}</td>
-                    <td class="td"><span class="edit-btn btn btn-success"  data-index ="${i}" data-toggle="modal" data-target="#edit-Modal" >Confirm</span></td>
+                    
 
                     </tr>
                 `;
                 $('#LockedUsersTbl > tbody:last-child').append(markup);
             }
-            
-
+       
         }
 
-
-
-
-
+        
         
 
-        $('.edit-btn').click(function(){
+        $('.edit-btn').click(function () {
             let index = $(this).data('index');
-            selectedUsers =users[index];
-            $("#edit-ID").val(selectedUsers.id);
-            $("#edit-name").val(selectedUsers.username);
+            $("#edit-ID").val(index);
         })
-        $('.del-btn').click(function(){
+        $('.del-btn').click(function () {
             let index = $(this).data('index');
-            selectedUsers = users[index];
+            $('#del-ID').val(index);
         })
-        $('.update-btn').click(function(){
+        $('.update-btn').click(function () {
             let index = $(this).data('index');
-            selectedUsers = users[index];
+            $('#update-ID').val(index);
         })
+
+        $('.detailUser').click(function () {
+            let index = $(this).data('index');
+            $('#detail-ID').val(index);
+        })
+    
     }
 
-    function deleteAllRow(){
+    function deleteAllRow() {
         $('#usersTbl').find('tr:gt(0)').remove();
     }
-    $('#deleteBtn').click(function(){
-       $('#delete').val(selectedUsers.email);
-    });
-
-    $('#editBtn').click(function(){
+    $('#deleteBtn').click(function () {
         location.reload();
-        editUsers();
+        cancelUser();
     });
 
-    $('#updateBtn').click(function(){
-        $('#update').val(selectedUsers.email);
-     });
+    $('#editBtn').click(function () {
+        location.reload();
+        editUser();
+    });
+
+    $('#updateBtn').click(function () {
+        location.reload();
+        updateUser();
+    });
+
+    $('#getDetails').click(function () {
+        location.href = `./detail.php?id=${$('#detail-ID').val()}`;
+       
+    })
+
+
+    
 
     function _ajax_request(url, data, callback, type, method) {
         if (jQuery.isFunction(data)) {
@@ -152,25 +161,54 @@ $(document).ready(function() {
             data: data,
             success: callback,
             dataType: type
-            });
+        });
     }
     jQuery.extend({
-        put: function(url, data, callback, type) {
+        put: function (url, data, callback, type) {
             return _ajax_request(url, data, callback, type, 'PUT');
         },
-        
+
     });
 
-    function editUsers(){
+    function editUser() {
         let param = {
-            id : $("#edit-ID").val(),
-            confirm : $("#edit-confirm").val(),
+            id: $("#edit-ID").val(),
         }
 
         console.log(JSON.stringify(param));
         $.put("./confirmUsers.php",
             JSON.stringify(param),
-            function(data,status){
+            function (data, status) {
+                deleteAllRow();
+                getUsers();
+            }
+        )
+    }
+
+    function updateUser() {
+        let param = {
+            id: $("#update-ID").val(),
+        }
+
+        console.log(JSON.stringify(param));
+        $.put("./updateInfo.php",
+            JSON.stringify(param),
+            function (data, status) {
+                deleteAllRow();
+                getUsers();
+            }
+        )
+    }
+
+    function cancelUser() {
+        let param = {
+            id: $("#del-ID").val(),
+        }
+
+        console.log(JSON.stringify(param));
+        $.put("./cancelUser.php",
+            JSON.stringify(param),
+            function (data, status) {
                 deleteAllRow();
                 getUsers();
             }
@@ -179,9 +217,9 @@ $(document).ready(function() {
 
 })
 
+
 let MenuItems = document.querySelector(".menuItems");
-function Handle()
-{
+function Handle() {
     if (MenuItems.style.maxHeight == "0px") {
         MenuItems.style.maxHeight = "400px";
     }

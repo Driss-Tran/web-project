@@ -11,12 +11,13 @@ include './connect.php';
         $CMNDafter = $_POST["img-id-after"];
         $confirm = 0;
         $error=[];
-
+        if($username === 'admin'){
+            $error['username']="Bạn không thể tạo tài khoản này";
+        }
         if(empty($username))
         {
             $error['username']="Bạn chưa nhập họ và tên";
         }
-
         if(empty($email))
         {
             $error['email']="Bạn chưa nhập email";
@@ -58,7 +59,7 @@ include './connect.php';
 
         if(empty($error))
         {
-            $sql = "Insert into logup(username,address,email,phone,Birthday,Cmndbefore,CmndAfter,confirm) Values('$username','$address','$email','$phone','$birthday','$CMNDbefore','$CMNDafter','$confirm')";
+            $sql = "Insert into logup(username,address,email,phone,Birthday,Cmndbefore,CmndAfter,confirm,moneyremaining) Values('$username','$address','$email','$phone','$birthday','$CMNDbefore','$CMNDafter','$confirm',0)";
             mysqli_query($conn,$sql);
             $mail="Select * from logup where email='$email'";
             $query_email=mysqli_query($conn,$mail);
@@ -77,7 +78,7 @@ include './connect.php';
                     
                 }
             }   
-            $sql1 = "Insert into login(username,password,email) Values('$tk','$mk','$email')";
+            $sql1 = "Insert into login(username,password,email,timeOutTryLog) Values('$tk','$mk','$email',0)";
             mysqli_query($conn,$sql1); 
             $cpr="Select * from login where username=$tk";
             $query_users=mysqli_query($conn,$cpr);
