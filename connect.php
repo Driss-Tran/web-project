@@ -15,6 +15,7 @@
     $table_login="Create table if not exists login(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,username varchar(255),password varchar(255), email varchar(255), timeOutTryLog int)";
     $table_countLogin = "Create table if not exists login_tryLog(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,ipAddress varchar(30),tryLog bigint)";
     $table_historytransfer = "Create table if not exists historytransfer(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,username varchar(255), dayTransfer datetime, moneyTransfer bigint)";
+    $table_historbuycardphone = "Create table if not exists historbuycardphone(id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,username varchar(255),nameCard nvarchar(11),seriCard varchar(11), dayBought datetime, moneyBought bigint)";
     
     
     if(!$conn -> query($table_login))
@@ -30,6 +31,10 @@
         die("Cannot create table: ".$conn->error);
     }
     if(!$conn -> query($table_historytransfer))
+    {
+        die("Cannot create table: ".$conn->error);
+    }
+    if(!$conn -> query($table_historbuycardphone))
     {
         die("Cannot create table: ".$conn->error);
     }

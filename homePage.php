@@ -86,6 +86,9 @@ $userName = $temp['username'];
             <a href='#' class='text-decoration-none ' data-toggle='modal' data-target='#moneyTransfer'>Lịch sử giao
               dịch</a>
           </div>
+          <div class='card-footer text-primary border'>
+            <a href='#' class='text-decoration-none ' data-toggle='modal' data-target='#moneyTransfer'>Mua thẻ điện thoại</a>
+          </div>
         <?php
         } else if ($print['confirm'] === '1') {
 
@@ -99,6 +102,9 @@ $userName = $temp['username'];
           <div class='card-footer text-primary border'>
             <a href='./historyTransfer.php' class='text-decoration-none '>Lịch sử giao
               dịch</a>
+          </div>
+          <div class='card-footer text-primary border'>
+            <a href='./historyTransfer.php' class='text-decoration-none '>Mua thẻ điện thoại</a>
           </div>
           <?php
         }
@@ -117,12 +123,14 @@ $userName = $temp['username'];
 
           ?>
             <div class='card-footer text-primary border'>
-              <a href='./moneyTransfer.php' class='text-decoration-none' data-toggle='modal' data-target='#updateInfo'>Nạp tiền</a>
+              <a href='#' class='text-decoration-none' data-toggle='modal' data-target='#updateInfo'>Nạp tiền</a>
             </div>
             <div class='card-footer text-primary border'>
               <a href='#' class='text-decoration-none' data-toggle='modal' data-target='#updateInfo'>Chuyển tiền</a>
             </div>
-
+            <div class='card-footer text-primary border'>
+              <a href='#' class='text-decoration-none' data-toggle='modal' data-target='#updateInfo'>Mua thẻ điện thoại</a>
+            </div>
             <div class='card-footer text-primary border'>
               <a href='#' class='text-decoration-none ' data-toggle='modal' data-target='#updateInfo'>Lịch sử giao
                 dịch</a>

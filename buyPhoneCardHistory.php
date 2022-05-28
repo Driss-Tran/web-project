@@ -23,19 +23,14 @@ if(!isset($_SESSION['usr']))
     header('Location: login.php');
     die();
 }
-$sql1 = "select confirm from logup where email = (select email from login where username = '$username')";
-$temp1=mysqli_fetch_assoc(mysqli_query($conn,$sql1));
-if($temp1['confirm']!=='1'){
-        header('Location: homePage.php');
-        die();
-    }
+
 $username = $_SESSION['usr'];
 $sql = "select username from logup where email = (select email from login where username = '$username')";
 $temp=mysqli_fetch_assoc(mysqli_query($conn,$sql));
 $dataName = $temp['username'];
 
-$historyTransferSql = "select * from historytransfer where username = ?";
-$stm = $conn->prepare($historyTransferSql);
+$historyBoughtCardSql = "select * from historbuycardphone where username = ?";
+$stm = $conn->prepare($historyBoughtCardSql);
 $stm->bind_param('s',$dataName);
 $stm->execute();
 
@@ -49,7 +44,7 @@ $count = mysqli_num_rows($result);?>
             <a class="navbar-brand" href="./homePage.php">
                 <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
             </a>
-            <ul class="navbar-nav menuItems mb-5">
+            <ul class="navbar-nav menuItems mb-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chào,
                         <?php
@@ -65,8 +60,8 @@ $count = mysqli_num_rows($result);?>
                     <div class="dropdown-menu ">
                       <a class="dropdown-item" href="./userInfo.php">Thông tin khách hàng</a>
                       <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-                      <a class="dropdown-item" href="./moneyTransfer.php">Chuyển tiền</a>
-                      <a class="dropdown-item" href="./historyTransfer.php">Lịch sử giao dịch</a>
+                      <a class="dropdown-item" href="./buyPhoneCard.php">Mua thẻ điện thoại</a>
+                      <a class="dropdown-item" href="./buyPhoneCardHistory.php">Thông tin giao dịch</a>
                     </div>
                 </li>
                 <li class="nav-item active">
@@ -77,27 +72,33 @@ $count = mysqli_num_rows($result);?>
 
     </nav>
     <div class="container">
-        <h2 class="header_table">Lịch sử nạp tiền</h2>
+        <h2 class="header_table">Thông tin giao dịch mua thẻ điện thoại</h2>
         <table class="table">
             <tr class="tr">
               <th class="th">STT</th>
               <th class="th">Tên khách hàng</th>
+              <th class="th">Tên thẻ</th>
+              <th class="th">Mã số thẻ</th>
               <th class="th">Ngày giao dịch</th>
-              <th class="th">Số tiền</th>
+              <th class="th">Mệnh giá</th>
             </tr>
             <?php if($count>0){
                 $ID = 0;
             while($row = $result->fetch_assoc()){
-                $userName = $row['username'];
-                $dayTransfer = $row['dayTransfer'];
-                $moneyTransfer = $row['moneyTransfer'];
                 $ID++;
+                $userName = $row['username'];
+                $nameCard = $row['nameCard'];
+                $seriCard = $row['seriCard'];
+                $dayBought = $row['dayBought'];
+                $moneyBought = $row['moneyBought'];
                 echo "
                     <tr class='tr'>
                     <td class='td'>$ID</td>
                     <td class='td'>$userName</td>
-                    <td class='td'>$dayTransfer</td>
-                    <td class='td'>$moneyTransfer</td>
+                    <td class='td'>$nameCard</td>
+                    <td class='td'>$seriCard</td>
+                    <td class='td'>$dayBought</td>
+                    <td class='td'>$moneyBought</td>
               </tr>
                 ";
             }

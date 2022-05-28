@@ -425,3 +425,26 @@ form{
     }
 
 }
+
+.nameCards select{
+    width:100%;
+    height:38px;
+    border-radius:5px;
+}
+
+.nameCards select:focus{
+    width:100%;
+}
+
+.content_buy{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10%;
+    width: 50%;
+    max-height: 100%;
+    background-color:white;
+    position: relative;
+    border:4px solid greenyellow;
+    border-radius: 10px;
+    padding-bottom: 2%;
+}

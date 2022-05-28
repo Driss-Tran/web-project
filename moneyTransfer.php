@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/7b78e77d77.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
-    <title>Chức năng chuyển tiền</title>
+    <title>Chức năng nạp tiền</title>
 </head>
 <?php
     include './connect.php';
@@ -19,14 +19,21 @@
     $username = $_SESSION['usr'];
     $sql = "select username from logup where email = (select email from login where username = '$username')";
     $temp=mysqli_fetch_assoc(mysqli_query($conn,$sql));
+    $sql1 = "select confirm from logup where email = (select email from login where username = '$username')";
+    $temp1=mysqli_fetch_assoc(mysqli_query($conn,$sql1));
     $dataName = $temp['username'];
+    date_default_timezone_set("Asia/Bangkok");
 
     if(!isset($_SESSION['usr']))
     {
         header('Location: login.php');
         die();
     }
-    if(isset($_POST['submit'])){
+    if($temp1['confirm']!=='1'){
+        header('Location: homePage.php');
+        die();
+    }
+    if(isset($_POST['submit']) && $temp1['confirm']==='1'){
         $numberCard = $_POST['numberCard'];
         $expireDate = $_POST['expireDate'];
         $cvvCode = $_POST['cvvCode'];
@@ -50,7 +57,7 @@
         }
         else{
             if($numberCard==='111111' && $expireDate === $date1 && $cvvCode ==='411'){
-                $updateMoneySql = "update logup set moneyremaining = moneyremaining + ? where username = ?";
+                $updateMoneySql = "update logup set moneyremaining = moneyremaining + ? where username = email = (select email from login where username = '".$username."')";
                 $stm = $conn->prepare($updateMoneySql);
                 $stm->bind_param("ss",$moneyTransfer,$dataName);
                 $stm->execute();
@@ -81,13 +88,13 @@
                 }
                 else
                 {
-                    $updateMoneySql = "update logup set moneyremaining = moneyremaining + ? where username = ?";
+                    $updateMoneySql = "update logup set moneyremaining = moneyremaining + ? where email = (select email from login where username = '".$username."')";
                     $stm = $conn->prepare($updateMoneySql);
                     $stm->bind_param("ss",$moneyTransfer,$dataName);
                     $stm->execute();
 
                     $dayTransfer = date("Y/m/d H:i:s A",time());
-                    $historyUpdateSql = "insert into historytransfer(username,dayTransfer,moneyTransfer) values(?,?,?)";
+                    $historyUpdateSql = "insert into historytransfer(username,dayTransfer,moneyTransfer,dayBought) values(?,?,?)";
                     $stmt = $conn->prepare($historyUpdateSql);
                     $stmt->bind_param("sss",$dataName,$dayTransfer,$moneyTransfer);
                     $stmt->execute();
@@ -143,7 +150,7 @@
                 <h1 class="navbar-symbol"> <i class="fa fa-building mr-2"></i>PPS bank</h1>
             </a>
 
-            <ul class="navbar-nav menuItems mb-5">
+            <ul class="navbar-nav menuItems mb-3">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Chào,
                         <?php
@@ -206,6 +213,7 @@
             </div>
         </div>
     </div>
+
 <footer class="footer bg-dark text-white"><h4 class="footer-font"> ©Bản quyền thuộc về Phát - Phúc - Sơn</h4></footer>
 
 </body>
